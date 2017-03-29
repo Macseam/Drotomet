@@ -14,6 +14,8 @@ const history = syncHistoryWithStore(createBrowserHistory(), store);
 
 render(
     <Provider store={store} key="provider">
-        <Router routes={createRoutes(store)} history={history} />
+        <Router history={history}>
+          {createRoutes(store)}
+        </Router>
     </Provider>, window.document.getElementById('app')
 );

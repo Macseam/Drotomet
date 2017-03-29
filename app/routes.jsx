@@ -1,16 +1,22 @@
 'use strict';
 import React from 'react';
 import {
+  Switch,
   Route,
-  IndexRoute,
-  IndexRedirect,
-  Redirect,
 } from 'react-router';
 
-import AppContainer from 'containers/AppContainer';
+import App from "./components/App";
+import Home from "./components/Home";
+import LoginPage from "./components/LoginPage";
+import NotFound from "./components/NotFound";
+import ChapterList from './components/List';
+import ChapterDetails from './components/Details';
 
 export default function createRoutes() {
   return (
-    <Route path="/" component={AppContainer}/>
+    <div>
+      <Route exact path="/" component={App}/>
+      <Route path="/login" component={LoginPage}/>
+    </div>
   );
 }

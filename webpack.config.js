@@ -18,6 +18,10 @@ module.exports = {
 
   devtool: ((NODE_ENV == 'development') ? '#inline-source-map' : null),
 
+  devServer: {
+    historyApiFallback: true
+  },
+
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: 'build/bundle.js',

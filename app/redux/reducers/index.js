@@ -1,11 +1,13 @@
-'use strict';
+import { combineReducers } from "redux";
+import { routerReducer as routing } from "react-router-redux";
+import headerState from './headerReducer';
+import authState from './authReducer';
 
-import { combineReducers } from 'redux';
-import { routerReducer as routing } from 'react-router-redux';
-
+// main reducers
 const rootReducer = combineReducers({
-  routing
+  routing,
+  headerState,
+  authState
 });
 
 export default rootReducer;
-
