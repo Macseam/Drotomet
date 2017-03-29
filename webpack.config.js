@@ -16,7 +16,7 @@ module.exports = {
     './app/app'
   ],
 
-  devtool: ((NODE_ENV == 'development') ? '#inline-source-map' : null),
+  devtool: ((NODE_ENV == 'development') ? '#inline-source-map' : false),
 
   devServer: {
     historyApiFallback: true
