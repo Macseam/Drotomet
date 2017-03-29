@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
+import { Navigation } from 'react-router';
 
 class Home extends React.Component {
 
@@ -9,7 +9,7 @@ class Home extends React.Component {
   }
 
   handleGoToChapter(path) {
-    this.props.history.push(path);
+    this.context.router.push(path);
   }
 
   render() {
@@ -17,30 +17,30 @@ class Home extends React.Component {
       <div className="main-menu-wrapper">
         <div onClick={this.handleGoToChapter.bind(this, 'animals')} className="top-level-menu-item">
           <div className="vertical-aligner">
-            <div className="image-placeholder"></div>
+            <img src="imgs/animals.png" />
             <hr className="menu-item-divider" />
-            <p>First Category</p>
+            <p>Звери</p>
           </div>
         </div>
         <div onClick={this.handleGoToChapter.bind(this, 'birds')} className="top-level-menu-item">
           <div className="vertical-aligner">
-            <div className="image-placeholder"></div>
+            <img src="imgs/birds.png" />
             <hr className="menu-item-divider" />
-            <p>Second Category</p>
+            <p>Птицы</p>
           </div>
         </div>
         <div onClick={this.handleGoToChapter.bind(this, 'plants')} className="top-level-menu-item">
           <div className="vertical-aligner">
-            <div className="image-placeholder"></div>
+            <img src="imgs/plants.png" />
             <hr className="menu-item-divider" />
-            <p>Third Category</p>
+            <p>Растения</p>
           </div>
         </div>
         <div onClick={this.handleGoToChapter.bind(this, 'insects')} className="top-level-menu-item">
           <div className="vertical-aligner">
-            <div className="image-placeholder"></div>
+            <img src="imgs/insects.png" />
             <hr className="menu-item-divider" />
-            <p>Fourth Category</p>
+            <p>Насекомые</p>
           </div>
         </div>
       </div>
@@ -48,4 +48,8 @@ class Home extends React.Component {
   }
 }
 
-export default withRouter(connect(state => state)(Home));
+Home.contextTypes = {
+  router: React.PropTypes.object,
+};
+
+export default connect(state => state)(Home);

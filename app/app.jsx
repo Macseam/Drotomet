@@ -4,20 +4,18 @@ import 'babel-polyfill';
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { Router } from 'react-router';
+import { Router, useRouterHistory } from 'react-router';
 import { syncHistoryWithStore } from "react-router-redux";
 import configureStore from './store/configureStore';
 import createRoutes from './routes';
 import { createBrowserHistory, createHashHistory } from 'history';
 
 const store = configureStore();
-const history = process.env.NODE_ENV === 'development'
-  ? syncHistoryWithStore(createHashHistory(), store)
-  : syncHistoryWithStore(createBrowserHistory(), store);
+const history = useRouterHistory(createHashHistory)();
 
 render(
     <Provider store={store} key="provider">
-        <Router history={history}>
+        <Router onUpdate={() => console.log('router updated')} history={history}>
           {createRoutes(store)}
         </Router>
     </Provider>, window.document.getElementById('app')
