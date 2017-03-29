@@ -68,7 +68,6 @@ module.exports = {
       ],
     }, {
       test: /\.css$/,
-      exclude: /node_modules/,
       use: [
         {
           loader: 'style!css'
@@ -86,6 +85,13 @@ module.exports = {
       })
     }, {
       test: /\.woff$/,
+      use: [
+        {
+          loader: 'url-loader?limit=10000&minetype=application/font-woff'
+        },
+      ],
+    }, {
+      test: /\.woff2$/,
       use: [
         {
           loader: 'url-loader?limit=10000&minetype=application/font-woff'

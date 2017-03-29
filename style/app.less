@@ -1,4 +1,78 @@
-html, body {
-  margin: 0;
-  padding: 0;
+#app {
+  width: 90%;
+  margin: 20px auto;
+}
+
+.main-menu-wrapper {
+  text-align: center;
+}
+
+.menu-item-divider {
+  margin: 4px auto 10px auto;
+  border-top: 1px gray solid;
+}
+
+.top-level-menu-item {
+  font-size: 11px;
+  width: 300px;
+  height: 300px;
+  display: inline-block;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  background: #ffffff;
+  border: 1px silver solid;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.5s ease;
+  .vertical-aligner {
+    .image-placeholder {
+      background: gray;
+      width: 60px;
+      height: 60px;
+      margin: 0 auto;
+      transition: all 0.5s ease;
+    }
+    p {
+      white-space: nowrap;
+      text-transform: uppercase;
+      transition: all 0.5s ease;
+    }
+  }
+  &:before {
+    content: "\200B";
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+  }
+  &:hover {
+    border: 1px #000000 solid;
+    transition: all 0.5s ease;
+    .vertical-aligner {
+      transition: all 0.5s ease;
+      width: 200px;
+      .image-placeholder {
+        transform: translateY(-10px);
+        transition: all 0.5s ease;
+      }
+      p {
+        transform: translateY(10px);
+        transition: all 0.5s ease;
+      }
+    }
+  }
+  span {
+    position: relative;
+  }
+}
+
+.vertical-aligner {
+  display: inline-block;
+  vertical-align: middle;
+  width: 150px;
+  transition: all 0.5s ease;
+}
+
+.details-portrait {
+  width: 500px;
+  height: auto;
 }

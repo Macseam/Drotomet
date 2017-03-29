@@ -7,16 +7,17 @@ import {
 
 import App from "./components/App";
 import Home from "./components/Home";
-import LoginPage from "./components/LoginPage";
 import NotFound from "./components/NotFound";
 import ChapterList from './components/List';
 import ChapterDetails from './components/Details';
 
 export default function createRoutes() {
   return (
-    <div>
-      <Route exact path="/" component={App}/>
-      <Route path="/login" component={LoginPage}/>
-    </div>
+    <Switch>
+      <Route exact path="/" component={Home}/>
+      <Route path="/chapter/:id" component={ChapterList}/>
+      <Route path="/chapter/:id/details/:details" component={ChapterDetails}/>
+      <Route component={NotFound}/>
+    </Switch>
   );
 }
