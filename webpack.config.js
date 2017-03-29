@@ -4,7 +4,7 @@ let path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const extractLess = new ExtractTextPlugin({
   filename: "[name].[contenthash].css",
-  disable: false
+  disable: process.env.NODE_ENV === "development"
 });
 
 const NODE_ENV = process.env.NODE_ENV || 'production';
@@ -16,7 +16,7 @@ module.exports = {
     './app/app'
   ],
 
-  devtool: '#inline-source-map',
+  devtool: ((NODE_ENV == 'development') ? '#inline-source-map' : false),
 
   devServer: {
     historyApiFallback: true
