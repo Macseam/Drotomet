@@ -15,3 +15,15 @@ export function getHeaderAuthToken () {
       });
   };
 }
+
+export function getChaptersList () {
+  return (dispatch) => {
+    dispatch(requestData(AuthTypes.GET_CHAPTERS_LIST_REQUEST));
+    return axios.get(`app/sample_data/sample.json`)
+      .then((response) => {
+        dispatch(receiveData(AuthTypes.GET_CHAPTERS_LIST_SUCCESS, response.data));
+      }).catch((response) => {
+        dispatch(receiveError(AuthTypes.GET_CHAPTERS_LIST_FAILURE, response.data));
+      });
+  };
+}

@@ -10,9 +10,10 @@ class AppContainer extends Component {
   }
 
   render() {
+    const children = this.props.children;
     return (
       <div>
-        <p>App Container</p>
+        {children}
       </div>
     );
   }

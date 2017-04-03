@@ -17,28 +17,12 @@ class ChapterList extends React.Component {
     this.context.router.push('');
   }
 
-  nameChapterAppropriately(pathName) {
-    console.log(pathName);
-    switch(pathName) {
-      case 'animals':
-        return 'Звери';
-      case 'birds':
-        return 'Птицы';
-      case 'insects':
-        return 'Насекомые';
-      case 'plants':
-        return 'Растения';
-      default:
-        return 'Неизвестный раздел';
-    }
-  }
-
   render() {
     const { children } = this.props;
     const listItems = [
-      {name: 'Тестовое название', path: 'test-path'},
-      {name: 'Еще тестовое название', path: 'other-test-path'},
-      {name: 'И еще одно тестовое название', path: 'another-test-path'}
+      {name: 'First item of the list', path: 'firstItem'},
+      {name: 'Second item', path: 'secondItem'},
+      {name: 'And here goes the third item', path: 'thirdItem'}
     ];
     if (this.props.params.name) {
       return (
@@ -48,24 +32,23 @@ class ChapterList extends React.Component {
       );
     }
     return (
-      <div>
+      <div className="chapter-items-list-wrapper">
         <button
           type="button"
           className="btn btn-default btn-xs"
           onClick={this.handleGoBack.bind(this)}
         >
-          Вернуться в главное меню
+          Go back to main menu
         </button>
-        <h3>{this.nameChapterAppropriately(this.props.params.chapter)}</h3>
+        <h3>{this.props.params.chapter}</h3>
           {_.map(listItems, (listItem, key)=>{
             return (
             <div
               key={'listItem' + key}
-              className="bs-callout bs-callout-info"
-              onClick={this.handleGoToDetails.bind(this, listItem.path)}
+              className="bs-callout bs-callout-info list-item"
             >
-              <img src="imgs/squirrel.jpg" />
-              <h4 className="link">{listItem.name}</h4>
+              <div className="image-placeholder">&nbsp;</div>
+              <h4 className="link list-item-title" onClick={this.handleGoToDetails.bind(this, listItem.path)}>{listItem.name}</h4>
               <p>Sometimes emphasis classes cannot be applied due to the specificity of another selector. In most cases, a sufficient workaround is to wrap your text.</p>
             </div>
             );

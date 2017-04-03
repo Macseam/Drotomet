@@ -48,8 +48,10 @@
     border: 1px #000000 solid;
     transition: all 0.5s ease;
     .vertical-aligner {
-      transition: all 0.5s ease;
-      width: 200px;
+      hr {
+        width: 100%;
+        transition: all 0.5s ease;
+      }
       .image-placeholder {
         transform: translateY(-10px);
         transition: all 0.5s ease;
@@ -68,11 +70,42 @@
 .vertical-aligner {
   display: inline-block;
   vertical-align: middle;
-  width: 150px;
-  transition: all 0.5s ease;
+  width: 200px;
+  hr {
+    width: 50%;
+    transition: all 0.5s ease;
+  }
 }
 
-.details-portrait {
-  width: 500px;
-  height: auto;
+.chapter-items-list-wrapper {
+  .list-item {
+    margin: 18px 0;
+    &:not(:last-of-type) {
+      border-bottom: 1px dashed silver;
+      padding-bottom: 10px;
+    }
+    .list-item-title {
+      cursor: pointer;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+  .image-placeholder {
+    background: gray;
+    width: 70px;
+    height: 70px;
+    float: left;
+    margin: 0 16px 0 0;
+  }
+}
+
+.item-details-wrapper {
+  .image-placeholder {
+    background: gray;
+    width: 500px;
+    height: 500px;
+    float: left;
+    margin: 0 16px 0 0;
+  }
 }

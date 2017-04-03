@@ -1,0 +1,20 @@
+{
+  "chapters": [
+    {
+      "id": "firstChapter",
+      "title": "First Chapter"
+    },
+    {
+      "id": "secondChapter",
+      "title": "Second Chapter"
+    },
+    {
+      "id": "thirdChapter",
+      "title": "Third Chapter"
+    },
+    {
+      "id": "fourthChapter",
+      "title": "Fourth Chapter"
+    }
+  ]
+}

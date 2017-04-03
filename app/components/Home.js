@@ -2,10 +2,18 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Navigation } from 'react-router';
 
+import { bindActionCreators } from 'redux';
+import * as authActions from '../redux/actions/authActions';
+
 class Home extends React.Component {
 
   constructor(props) {
     super(props);
+    this.actions = this.props.authActions;
+  }
+
+  componentDidMount() {
+    this.actions.getChaptersList();
   }
 
   handleGoToChapter(path) {
@@ -15,32 +23,32 @@ class Home extends React.Component {
   render() {
     return (
       <div className="main-menu-wrapper">
-        <div onClick={this.handleGoToChapter.bind(this, 'animals')} className="top-level-menu-item">
+        <div onClick={this.handleGoToChapter.bind(this, 'firstChapter')} className="top-level-menu-item">
           <div className="vertical-aligner">
-            <img src="imgs/animals.png" />
+            <div className="image-placeholder">&nbsp;</div>
             <hr className="menu-item-divider" />
-            <p>Звери</p>
+            <p>Chapter 1</p>
           </div>
         </div>
-        <div onClick={this.handleGoToChapter.bind(this, 'birds')} className="top-level-menu-item">
+        <div onClick={this.handleGoToChapter.bind(this, 'secondChapter')} className="top-level-menu-item">
           <div className="vertical-aligner">
-            <img src="imgs/birds.png" />
+            <div className="image-placeholder">&nbsp;</div>
             <hr className="menu-item-divider" />
-            <p>Птицы</p>
+            <p>Chapter 2</p>
           </div>
         </div>
-        <div onClick={this.handleGoToChapter.bind(this, 'plants')} className="top-level-menu-item">
+        <div onClick={this.handleGoToChapter.bind(this, 'thirdChapter')} className="top-level-menu-item">
           <div className="vertical-aligner">
-            <img src="imgs/plants.png" />
+            <div className="image-placeholder">&nbsp;</div>
             <hr className="menu-item-divider" />
-            <p>Растения</p>
+            <p>Chapter 3</p>
           </div>
         </div>
-        <div onClick={this.handleGoToChapter.bind(this, 'insects')} className="top-level-menu-item">
+        <div onClick={this.handleGoToChapter.bind(this, 'fourthChapter')} className="top-level-menu-item">
           <div className="vertical-aligner">
-            <img src="imgs/insects.png" />
+            <div className="image-placeholder">&nbsp;</div>
             <hr className="menu-item-divider" />
-            <p>Насекомые</p>
+            <p>Chapter 4</p>
           </div>
         </div>
       </div>
@@ -52,4 +60,12 @@ Home.contextTypes = {
   router: React.PropTypes.object,
 };
 
-export default connect(state => state)(Home);
+function mapDispatchToProps(dispatch) {
+  return {
+    authActions: bindActionCreators({
+      ...authActions,
+    }, dispatch),
+  };
+}
+
+export default connect(state => state, mapDispatchToProps)(Home);
