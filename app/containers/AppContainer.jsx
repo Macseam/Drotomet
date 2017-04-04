@@ -3,14 +3,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { Navigation } from 'react-router';
+
 class AppContainer extends Component {
 
   constructor(props) {
     super(props);
+
   }
 
   render() {
-    const children = this.props.children;
+    const {
+      children
+    } = this.props;
     return (
       <div>
         {children}
@@ -18,9 +23,5 @@ class AppContainer extends Component {
     );
   }
 }
-
-AppContainer.propTypes = {
-  children: React.PropTypes.node
-};
 
 export default connect(state => state)(AppContainer);

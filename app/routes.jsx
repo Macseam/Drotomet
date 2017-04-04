@@ -5,8 +5,8 @@ import {
   IndexRoute,
 } from 'react-router';
 
-import App from "./components/App";
-import Home from "./components/Home";
+import AppContainer from "./containers/AppContainer";
+import IndexContainer from "./containers/IndexContainer";
 import LoginPage from "./components/LoginPage";
 import NotFound from "./components/NotFound";
 import ChapterList from './components/List';
@@ -14,12 +14,12 @@ import ChapterDetails from './components/Details';
 
 export default function createRoutes(store) {
   return (
-    <Route path="/" component={App}>
+    <Route path="/" component={AppContainer}>
       <Route path="login" component={LoginPage}/>
-      <Route path=":chapter" component={ChapterList}>
-        <Route path=":name" component={ChapterDetails}/>
+      <Route path="chapter/:chapter" component={ChapterList}>
+        <Route path="details/:details" component={ChapterDetails}/>
       </Route>
-      <IndexRoute component={Home}/>
+      <IndexRoute component={IndexContainer} />
       <Route path="*" component={NotFound}/>
     </Route>
   );

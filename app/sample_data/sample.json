@@ -1,19 +1,36 @@
 {
   "chapters": [
     {
-      "id": "firstChapter",
-      "title": "First Chapter"
+      "slug": "first-chapter",
+      "title": "First Chapter",
+      "items": [
+        {
+          "slug": "ch-1-first-item",
+          "title": "Chapter One First Item",
+          "description": "Sometimes emphasis classes cannot be applied due to the specificity of another selector. In most cases, a sufficient workaround is to wrap your text."
+        },
+        {
+          "slug": "ch-1-second-item",
+          "title": "Chapter One Second Item",
+          "description": "Sometimes emphasis classes cannot be applied due to the specificity of another selector. In most cases, a sufficient workaround is to wrap your text."
+        },
+        {
+          "slug": "ch-1-third-item",
+          "title": "Chapter One Third Item",
+          "description": "Sometimes emphasis classes cannot be applied due to the specificity of another selector. In most cases, a sufficient workaround is to wrap your text."
+        }
+      ]
     },
     {
-      "id": "secondChapter",
+      "slug": "second-chapter",
       "title": "Second Chapter"
     },
     {
-      "id": "thirdChapter",
+      "slug": "third-chapter",
       "title": "Third Chapter"
     },
     {
-      "id": "fourthChapter",
+      "slug": "fourth-chapter",
       "title": "Fourth Chapter"
     }
   ]
