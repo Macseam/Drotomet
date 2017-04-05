@@ -24,7 +24,7 @@ class IndexContainer extends Component {
     if ((nextProps.authState.chaptersList !== this.state.menuChapters &&
       nextProps.authState.loaded) && nextProps.authState.chaptersList) {
       this.setState({
-        menuChapters: nextProps.authState.chaptersList.chapters,
+        menuChapters: nextProps.authState.chaptersList,
       });
     }
   }

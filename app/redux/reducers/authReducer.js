@@ -5,6 +5,7 @@ import * as AuthTypes from '../types/authTypes';
 const initialState = {
   authToken: null,
   chaptersList: null,
+  chapterItemsList: null,
   loading: false,
   loaded: false,
 };
@@ -25,6 +26,13 @@ export default function authInfo(state = initialState, action) {
       return { ...state, chaptersList: action.data, loading: false, loaded: true };
     case AuthTypes.GET_CHAPTERS_LIST_FAILURE:
       return { ...state, chaptersList: initialState.chaptersList, loading: false, loaded: true };
+
+    case AuthTypes.GET_ITEMS_LIST_REQUEST:
+      return { ...state, chapterItemsList: initialState.chapterItemsList, loading: true, loaded: false };
+    case AuthTypes.GET_ITEMS_LIST_SUCCESS:
+      return { ...state, chapterItemsList: action.data, loading: false, loaded: true };
+    case AuthTypes.GET_ITEMS_LIST_FAILURE:
+      return { ...state, chapterItemsList: initialState.chapterItemsList, loading: false, loaded: true };
 
     default:
       return state;
