@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/Macseam/Simple-Clean-Redux-Boilerplate#readme",
   "devDependencies": {
-    "babel-сli": "^6.23.0",
+    "babel-cli": "^6.23.0",
     "babel-core": "^6.24.0",
     "babel-loader": "^6.4.1",
     "babel-plugin-react-transform": "^2.0.2",
