@@ -13,19 +13,17 @@ const AUTH = process.env.AUTH || false;
 module.exports = {
 
   entry: [
-    './app/app'
+    './app'
   ],
 
-  devtool: ((NODE_ENV == 'development') ? '#inline-source-map' : false),
+  devtool: ((NODE_ENV === 'development') ? '#inline-source-map' : false),
 
-  devServer: {
-    historyApiFallback: true
-  },
+  context: path.join(__dirname, 'app'),
 
   output: {
-    path: path.resolve(__dirname, 'build'),
-    filename: 'build/bundle.js',
-    publicPath: '/build/',
+    path: path.resolve(__dirname, 'build/'),
+    filename: 'bundle.js',
+    publicPath: 'build/',
   },
 
   resolve: {
@@ -151,7 +149,7 @@ module.exports = {
     'showdown': 'window.Showdown'
   },
 
-  plugins: NODE_ENV == 'development' ? [
+  plugins: NODE_ENV === 'development' ? [
     extractLess,
     new webpack.DefinePlugin({
       'process.env':{
