@@ -13,7 +13,7 @@ const AUTH = process.env.AUTH || false;
 module.exports = {
 
   entry: [
-    './app'
+    './app/app'
   ],
 
   devtool: ((NODE_ENV === 'development') ? '#inline-source-map' : false),
@@ -21,9 +21,9 @@ module.exports = {
   context: path.join(__dirname, 'app'),
 
   output: {
-    path: path.resolve(__dirname, 'build/'),
+    path: path.resolve(__dirname, 'build'),
     filename: 'bundle.js',
-    publicPath: 'build/',
+    publicPath: '/build/',
   },
 
   resolve: {
