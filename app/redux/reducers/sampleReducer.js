@@ -1,7 +1,6 @@
 'use strict';
 
 const initialState = {
-  authToken: null,
   chaptersList: null,
   chapterItemsList: null,
   loading: false,
@@ -10,13 +9,6 @@ const initialState = {
 
 export default function authInfo(state = initialState, action) {
   switch (action.type) {
-
-    case 'GET_HEADER_AUTH_TOKEN_REQUEST':
-      return { ...state, authToken: initialState.authToken, loading: true, loaded: false };
-    case 'GET_HEADER_AUTH_TOKEN_SUCCESS':
-      return { ...state, authToken: action.data, loading: false, loaded: true };
-    case 'GET_HEADER_AUTH_TOKEN_FAILURE':
-      return { ...state, authToken: initialState.authToken, loading: false, loaded: true };
 
     case 'GET_CHAPTERS_LIST_REQUEST':
       return { ...state, chaptersList: initialState.chaptersList, loading: true, loaded: false };

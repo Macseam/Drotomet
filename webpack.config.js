@@ -18,7 +18,9 @@ module.exports = {
 
   devtool: ((NODE_ENV === 'development') ? '#inline-source-map' : false),
 
-  context: path.join(__dirname, 'app'),
+  devServer: {
+    historyApiFallback: true
+  },
 
   output: {
     path: path.resolve(__dirname, 'build'),
@@ -66,11 +68,12 @@ module.exports = {
       ],
     }, {
       test: /\.css$/,
-      use: [
-        {
-          loader: 'style!css'
-        },
-      ],
+      loader: extractLess.extract({
+        use: [{
+          loader: "css-loader"
+        }],
+        fallback: "style-loader"
+      })
     }, {
       test: /\.less$/,
       loader: extractLess.extract({
@@ -118,6 +121,13 @@ module.exports = {
       ],
     }, {
       test: /\.png$/,
+      use: [
+        {
+          loader: 'file-loader'
+        },
+      ],
+    }, {
+      test: /\.jpg/,
       use: [
         {
           loader: 'file-loader'

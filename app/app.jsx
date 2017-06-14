@@ -5,7 +5,6 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { Router, useRouterHistory } from 'react-router';
-import { syncHistoryWithStore } from "react-router-redux";
 
 import configureStore from './store/configureStore';
 import createRoutes from './routes';

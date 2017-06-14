@@ -1,12 +1,10 @@
 import { combineReducers } from "redux";
 import { routerReducer as routing } from "react-router-redux";
-import headerState from './headerReducer';
-import authState from './authReducer';
+import authState from './sampleReducer';
 
-// main reducers
+// Reducers list
 const rootReducer = combineReducers({
   routing,
-  headerState,
   authState
 });
 
