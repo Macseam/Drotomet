@@ -9,7 +9,7 @@ Recent version: 1.0.0
 ***
 #### Installation
 ```
-$ git clone git@github.com:Macseam/Simple-Clean-Redux-Boilerplate.git [your_folder_name_here]
+$ git clone git@github.com:Macseam/BaikalPlate.git [your_folder_name_here]
 $ cd [your_folder_name_here]
 $ npm install
 ```
