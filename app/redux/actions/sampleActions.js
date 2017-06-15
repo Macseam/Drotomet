@@ -4,6 +4,20 @@ import axios from 'axios';
 import _ from 'lodash';
 import { requestData, receiveData, receiveError } from './actionUtils';
 
+export function initializeGameData (action) {
+  const actionName = 'INITIALIZE_GAME_DATA';
+  return (dispatch) => {
+    dispatch(receiveData(actionName, action));
+  };
+}
+
+export function addPlayerScore (action) {
+  const actionName = 'ADD_PLAYER_SCORE';
+  return (dispatch) => {
+    dispatch(receiveData(actionName, action));
+  };
+}
+
 export function getChaptersList () {
   const actionName = 'GET_CHAPTERS_LIST';
   return (dispatch) => {

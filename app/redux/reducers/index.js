@@ -1,11 +1,11 @@
 import { combineReducers } from "redux";
 import { routerReducer as routing } from "react-router-redux";
-import authState from './sampleReducer';
+import gameInfo from './gameReducer';
 
 // Reducers list
 const rootReducer = combineReducers({
   routing,
-  authState
+  gameInfo
 });
 
 export default rootReducer;

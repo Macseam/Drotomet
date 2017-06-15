@@ -1,14 +1,34 @@
 'use strict';
 
+import _ from 'lodash';
+
 const initialState = {
   chaptersList: null,
   chapterItemsList: null,
-  loading: false,
-  loaded: false,
+  gameData: null
 };
 
-export default function authInfo(state = initialState, action) {
+export default function gameInfo(state = initialState, action) {
   switch (action.type) {
+
+    case 'INITIALIZE_GAME_DATA_SUCCESS':
+      return { ...state, gameData: action.data };
+
+    case 'ADD_PLAYER_SCORE_SUCCESS':
+      let editedPlayers = [];
+      _.map(action.data.currentState.playerNames, (playerObj)=>{
+        if (playerObj.id === action.data.id) {
+          let playerMutated = playerObj;
+          playerMutated.score = action.data.scoreSum;
+          editedPlayers.push(playerMutated);
+        }
+        else {
+          editedPlayers.push(playerObj);
+        }
+      });
+      let mutatedState = action.data.currentState;
+      mutatedState.playerNames = editedPlayers;
+      return { ...state, gameData: mutatedState };
 
     case 'GET_CHAPTERS_LIST_REQUEST':
       return { ...state, chaptersList: initialState.chaptersList, loading: true, loaded: false };
