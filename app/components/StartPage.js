@@ -25,11 +25,8 @@ class FormGroup extends React.Component {
   render() {
     return (
       <div className="form-group">
-        <label htmlFor={"inputName" + this.props.idNumber}>Игрок {this.props.idNumber}</label>
-        <input type="text" className="form-control" id={"inputName" + this.props.idNumber} onChange={this.changePlayerName.bind(this)} />
-        {(this.props.idNumber > 1) &&
-          <button onClick={this.props.deletePlayer} type="button" className="btn btn-danger delete-player">X</button>
-        }
+        <label className="player-name-label" htmlFor={"inputName" + this.props.idNumber}>Игрок {this.props.idNumber}</label>
+        <input type="text" className="player-name-input form-control" id={"inputName" + this.props.idNumber} onChange={this.changePlayerName.bind(this)} />
       </div>
     );
   }
@@ -44,32 +41,26 @@ class StartPage extends React.Component {
 
     this.state = {
       players: 1,
-      dartsCount: '0',
-      maxScore: '0',
+      dartsCount: '6',
+      maxScore: '300',
     };
   }
 
-  addPlayer() {
+  changePlayersCount(event) {
     this.setState({
-      players: this.state.players + 1
-    });
-  }
-
-  deletePlayer() {
-    this.setState({
-      players: this.state.players > 0 ? this.state.players - 1 : 0
+      players: (event.target && /^\d+$/.test(event.target.value) && (parseInt(event.target.value) <= 6) && parseInt(event.target.value) > 0) ? event.target.value : 1
     });
   }
 
   changeDartsCount(event) {
     this.setState({
-      dartsCount: (event.target && /^\d+$/.test(event.target.value)) ? event.target.value : ''
+      dartsCount: (event.target && /^\d+$/.test(event.target.value) && (parseInt(event.target.value) <= 6) && parseInt(event.target.value) > 0) ? event.target.value : 1
     });
   }
 
   changeMaxScore(event) {
     this.setState({
-      maxScore: (event.target && /^\d+$/.test(event.target.value)) ? event.target.value : ''
+      maxScore: (event.target && /^\d+$/.test(event.target.value)) ? event.target.value : 0
     });
   }
 
@@ -104,10 +95,11 @@ class StartPage extends React.Component {
     }
 
     return (
-      <div>
-        <h4>Дротомёт v.1.0</h4>
+      <div className="start-page-container">
+        <div className="logo-title">Дротомёт</div>
         <form className="form-inline">
-          <div className="form-group">
+          <div className="form-group start-page-option-block">
+            <div className="start-option-icon max-score">&nbsp;</div>
             <label htmlFor="dartsCount">
               До скольки баллов играем?
             </label>
@@ -119,9 +111,10 @@ class StartPage extends React.Component {
               onChange={this.changeMaxScore.bind(this)}
             />
           </div>
-          <div className="form-group">
+          <div className="form-group start-page-option-block">
+            <div className="start-option-icon darts-count">&nbsp;</div>
             <label htmlFor="dartsCount">
-              Сколько дротиков кидаем каждый раз?
+              Сколько дротиков кидаем?
             </label>
             <input
               type="text"
@@ -131,29 +124,35 @@ class StartPage extends React.Component {
               onChange={this.changeDartsCount.bind(this)}
             />
           </div>
+          <div className="form-group start-page-option-block">
+            <div className="start-option-icon players-count">&nbsp;</div>
+            <label htmlFor="dartsCount">
+              Сколько будет игроков?
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="dartsCount"
+              value={this.state.players}
+              onChange={this.changePlayersCount.bind(this)}
+            />
+          </div>
           {playerNames.map(function(playerName, idNumber) {
             return (
               <FormGroup
                 key={idNumber + 1}
                 ref={"inputName" + (idNumber + 1)}
                 idNumber={idNumber + 1}
-                deletePlayer={self.deletePlayer.bind(self)} />
+              />
             );
           })}
           <br/>
           <button
             type="button"
-            onClick={this.addPlayer.bind(this)}
-            className="btn btn-success"
-          >
-            Добавить игрока
-          </button>
-          <button
-            type="button"
             onClick={this.startGame.bind(this)}
-            className="btn btn-primary"
+            className="btn btn-primary start-game-button"
           >
-            Играть >>>
+            Начать игру
           </button>
         </form>
       </div>

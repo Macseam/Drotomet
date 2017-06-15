@@ -18,6 +18,13 @@ export function addPlayerScore (action) {
   };
 }
 
+export function clearPlayersScore (action) {
+  const actionName = 'CLEAR_PLAYERS_SCORE';
+  return (dispatch) => {
+    dispatch(receiveData(actionName, action));
+  };
+}
+
 export function getChaptersList () {
   const actionName = 'GET_CHAPTERS_LIST';
   return (dispatch) => {

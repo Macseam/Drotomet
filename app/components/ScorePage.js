@@ -54,6 +54,14 @@ class ScorePage extends React.Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.gameInfo.gameData !== this.props.gameInfo.gameData) {
+      this.setState({
+        playersData: nextProps.gameInfo.gameData
+      });
+    }
+  }
+
   addScore(id) {
     const currentState = this.props.gameInfo.gameData;
     const currentPlayerScore = _.find(this.state.playersData.playerNames, (curPlayer)=>{
@@ -85,7 +93,15 @@ class ScorePage extends React.Component {
   }
 
   startNewGame() {
+    this.startSameGame();
     this.context.router.push('');
+  }
+
+  startSameGame() {
+    this.actions.clearPlayersScore({currentState: this.props.gameInfo.gameData});
+    this.setState({
+      currentPlayer: 1
+    });
   }
 
   render() {
@@ -103,7 +119,7 @@ class ScorePage extends React.Component {
     }
 
     return (
-      <div>
+      <div className="score-page-container">
         <table className="table">
           <thead>
             <tr>
@@ -118,33 +134,33 @@ class ScorePage extends React.Component {
               return (
                 <tr key={index}>
                   <td>
-                    <span className={(percentage >= 100)
+                    <span className={((percentage >= 100)
                       ? "label label-success player-name"
-                      : "label label-default player-name"}>
+                      : "label label-default player-name") + ((player.id === self.state.currentPlayer) ? " current" : "")}>
                       {player.name}
-                      </span>
+                    </span>
                     {(player.id === self.state.currentPlayer) &&
-                      <form className="form-inline">
-                        {_.map(dartsCountArray, (dataNum, index) => {
-                          return (
-                            <ScoreInput
-                              ref={player.id + '-' + (index + 1)}
-                              key={index}
-                              className="form-group"
-                              width={(100 / self.state.playersData.dartsCount) + '%'}
-                            />
-                          );
-                        })}
-                      </form>
-                    }
-                    {(player.id === self.state.currentPlayer) &&
-                      <button
-                        onClick={self.addScore.bind(self, player.id)}
-                        type="button"
-                        className="btn btn-primary"
-                      >
-                        Следующий
-                      </button>
+                      <div className="current-player-controls">
+                        <form className="form-inline">
+                          {_.map(dartsCountArray, (dataNum, index) => {
+                            return (
+                              <ScoreInput
+                                ref={player.id + '-' + (index + 1)}
+                                key={index}
+                                className="form-group"
+                                width={(100 / self.state.playersData.dartsCount) + '%'}
+                              />
+                            );
+                          })}
+                        </form>
+                        <button
+                          onClick={self.addScore.bind(self, player.id)}
+                          type="button"
+                          className="btn btn-primary"
+                        >
+                          Следующий
+                        </button>
+                      </div>
                     }
                   </td>
                   <td>
@@ -167,8 +183,17 @@ class ScorePage extends React.Component {
             onClick={this.startNewGame.bind(this)}
             className="btn btn-primary"
           >
-            Сыграть ещё раз >>>
+            Начать новую игру
           </button>
+        }
+        {self.state.currentPlayer === 100 &&
+        <button
+          type="button"
+          onClick={this.startSameGame.bind(this)}
+          className="btn btn-primary"
+        >
+          Повторить игру
+        </button>
         }
       </div>
 

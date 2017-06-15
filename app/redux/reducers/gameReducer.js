@@ -30,6 +30,17 @@ export default function gameInfo(state = initialState, action) {
       mutatedState.playerNames = editedPlayers;
       return { ...state, gameData: mutatedState };
 
+    case 'CLEAR_PLAYERS_SCORE_SUCCESS':
+      let editedPlayersToClear = [];
+      _.map(action.data.currentState.playerNames, (playerObj)=>{
+        let playerMutated = playerObj;
+        playerMutated.score = 0;
+        editedPlayersToClear.push(playerMutated);
+      });
+      let mutatedStateToClear = action.data.currentState;
+      mutatedStateToClear.playerNames = editedPlayersToClear;
+      return { ...state, gameData: mutatedStateToClear };
+
     case 'GET_CHAPTERS_LIST_REQUEST':
       return { ...state, chaptersList: initialState.chaptersList, loading: true, loaded: false };
     case 'GET_CHAPTERS_LIST_SUCCESS':

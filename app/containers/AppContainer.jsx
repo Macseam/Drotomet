@@ -17,7 +17,7 @@ class AppContainer extends Component {
       children
     } = this.props;
     return (
-      <div>
+      <div className="start-page-overlay">
         {children}
       </div>
     );
