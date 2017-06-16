@@ -25,6 +25,7 @@ class ScoreInput extends React.Component {
   render() {
     return (
       <div className="form-group" style={{width: this.props.width}}>
+        <label>+</label>
         <input
           type="text"
           className="form-control darts"
@@ -140,25 +141,13 @@ class ScorePage extends React.Component {
                       {player.name}
                     </span>
                     {(player.id === self.state.currentPlayer) &&
-                      <div className="current-player-controls">
-                        <form className="form-inline">
-                          {_.map(dartsCountArray, (dataNum, index) => {
-                            return (
-                              <ScoreInput
-                                ref={player.id + '-' + (index + 1)}
-                                key={index}
-                                className="form-group"
-                                width={(100 / self.state.playersData.dartsCount) + '%'}
-                              />
-                            );
-                          })}
-                        </form>
+                      <div className="current-player-controls left">
                         <button
                           onClick={self.addScore.bind(self, player.id)}
                           type="button"
                           className="btn btn-primary"
                         >
-                          Следующий
+                          Завершить ход
                         </button>
                       </div>
                     }
@@ -171,6 +160,22 @@ class ScorePage extends React.Component {
                       style={{width: percentage + "%"}}>
                       {player.score}
                     </div>
+                    {(player.id === self.state.currentPlayer) &&
+                    <div className="current-player-controls">
+                      <form className="form-inline">
+                        {_.map(dartsCountArray, (dataNum, index) => {
+                          return (
+                            <ScoreInput
+                              ref={player.id + '-' + (index + 1)}
+                              key={index}
+                              className="form-group"
+                              width={(100 / self.state.playersData.dartsCount) + '%'}
+                            />
+                          );
+                        })}
+                      </form>
+                    </div>
+                    }
                   </td>
                 </tr>
               );
@@ -181,9 +186,9 @@ class ScorePage extends React.Component {
           <button
             type="button"
             onClick={this.startNewGame.bind(this)}
-            className="btn btn-primary"
+            className="btn btn-success"
           >
-            Начать новую игру
+            Изменить настройки
           </button>
         }
         {self.state.currentPlayer === 100 &&

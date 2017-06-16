@@ -24,8 +24,8 @@ class FormGroup extends React.Component {
 
   render() {
     return (
-      <div className="form-group">
-        <label className="player-name-label" htmlFor={"inputName" + this.props.idNumber}>Игрок {this.props.idNumber}</label>
+      <div className="form-group new-player">
+        <label className="player-name-label" htmlFor={"inputName" + this.props.idNumber}>{this.props.idNumber}</label>
         <input type="text" className="player-name-input form-control" id={"inputName" + this.props.idNumber} onChange={this.changePlayerName.bind(this)} />
       </div>
     );
