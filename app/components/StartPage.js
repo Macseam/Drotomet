@@ -48,31 +48,29 @@ class StartPage extends React.Component {
 
   changePlayersCount(event) {
     this.setState({
-      players: (event.target && /^\d+$/.test(event.target.value) && (parseInt(event.target.value) <= 6) && parseInt(event.target.value) > 0) ? event.target.value : 1
+      players: (event.target && /^\d+$/.test(event.target.value) && (parseInt(event.target.value) <= 6) && parseInt(event.target.value) > 0) ? event.target.value : ''
     });
   }
 
   changeDartsCount(event) {
     this.setState({
-      dartsCount: (event.target && /^\d+$/.test(event.target.value) && (parseInt(event.target.value) <= 6) && parseInt(event.target.value) > 0) ? event.target.value : 1
+      dartsCount: (event.target && /^\d+$/.test(event.target.value) && (parseInt(event.target.value) <= 6) && parseInt(event.target.value) > 0) ? event.target.value : ''
     });
   }
 
   changeMaxScore(event) {
     this.setState({
-      maxScore: (event.target && /^\d+$/.test(event.target.value)) ? event.target.value : 0
+      maxScore: (event.target && /^\d+$/.test(event.target.value)) ? event.target.value : ''
     });
   }
 
   startGame() {
     let playerNames = [];
     for (let i = 1; i <= this.state.players; i ++) {
-      if (this.refs['inputName' + i]
-        && this.refs['inputName' + i].state.playerName
-        && !_.isEmpty(this.refs['inputName' + i].state.playerName)) {
+      if (this.refs['inputName' + i]) {
         playerNames.push({
           id: i,
-          name: this.refs['inputName' + i].state.playerName,
+          name: this.refs['inputName' + i].state.playerName || i,
           score: 0
         });
       }
@@ -137,6 +135,7 @@ class StartPage extends React.Component {
               onChange={this.changePlayersCount.bind(this)}
             />
           </div>
+          <hr className="divider" />
           {playerNames.map(function(playerName, idNumber) {
             return (
               <FormGroup
@@ -151,6 +150,7 @@ class StartPage extends React.Component {
             type="button"
             onClick={this.startGame.bind(this)}
             className="btn btn-primary start-game-button"
+            disabled={(parseInt(this.state.players) < 1) || this.state.players === ''}
           >
             Начать игру
           </button>

@@ -25,6 +25,13 @@ html, body {
   background-size: cover;
 }
 
+hr {
+  &.divider {
+    margin: 10px auto;
+    border: 0;
+  }
+}
+
 .start-page-overlay {
   width: 100%;
   height: 100%;
@@ -50,10 +57,12 @@ html, body {
       font-family: 'Bad Script', cursive;
       color: #ffffff;
       font-size: 40px;
+      margin-bottom: 20px;
     }
     .start-page-option-block {
       background: rgba(0,0,0,0.6);
       border-radius: 100%;
+      /*border: 2px rgba(255,255,255,0.2) dashed;*/
       margin: 0 20px;
       padding: 10px;
       width: 200px;
@@ -67,11 +76,12 @@ html, body {
       input[type=text] {
         background: transparent;
         border: 0;
-        border-bottom: 1px #cecece solid;
+        border-bottom: 1px rgba(255,255,255,0.5) solid;
         border-radius: 0;
         color: #cecece;
         text-align: center;
         font-size: 28px;
+        width: 50% !important;
         &:focus {
           border-bottom: 1px #cecece solid;
           border-radius: 0;
@@ -97,26 +107,48 @@ html, body {
     }
   }
   .score-page-container {
+    height: 100%;
     background: transparent url('../public/images/chalkboard.jpg');
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0 0 10px 0 rgba(0,0,0,1);
     border: 2px #777 solid;
     .current-player-controls {
-      position: relative;
+      position: absolute;
       left: 0;
+      right: 0;
       bottom: 0;
-      width: 80%;
-      margin-top: 14px;
+      width: 90%;
+      margin: 14px auto;
       background: transparent;
       padding-top: 7px;
-      border-top: 1px #ffffff solid;
+      border-top: 1px #ffffff dashed;
       opacity: 0.9;
       z-index: 1000;
       form {
-        height: 45px;
         padding: 5px 0;
         .form-group {
+          &:nth-last-child(1), &:nth-last-child(1) ~.form-group {
+            width: 100%;
+          }
+          &:nth-last-child(2), &:nth-last-child(2) ~.form-group {
+            width: 50%;
+          }
+          &:nth-last-child(3), &:nth-last-child(3) ~.form-group {
+            width: 33.3333%;
+          }
+          &:nth-last-child(4), &:nth-last-child(4) ~.form-group {
+            width: 25%;
+          }
+          &:nth-last-child(5), &:nth-last-child(5) ~.form-group {
+            width: 20%;
+          }
+          &:nth-last-child(6), &:nth-last-child(6) ~.form-group {
+            width: 16.6666%;
+          }
+          &:nth-last-child(7), &:nth-last-child(7) ~.form-group {
+            width: 14.2857%;
+          }
           label {
             display: inline-block;
             color: #cecece;
@@ -125,12 +157,12 @@ html, body {
             margin-right: 10px;
           }
           input[type=text] {
-            width: 60% !important;
+            width: 90% !important;
           }
         }
       }
       &.left {
-        margin-top: 20px;
+        margin-top: 0;
         padding: 0;
         background: transparent;
         border: 0;
@@ -179,18 +211,39 @@ button[type=button] {
   margin-right: 10px;
 }
 
-.table {
-  width: 100%;
-  td:first-of-type {
-    width: 30%;
-  }
-  th {
-    font-family: 'Bad Script', cursive;
-    color: #ffffff;
-  }
+.score-header {
+  font-family: 'Bad Script', cursive;
+  color: #cecece;
+  border-bottom: 1px #cecece solid;
+  padding-bottom: 10px;
+  margin: 20px auto !important;
 }
 
-tr {
+.each-player-score {
+  display: inline-block;
+  height: 70%;
+  vertical-align: top;
+  &:nth-last-child(1), &:nth-last-child(1) ~.each-player-score {
+    width: 100%;
+  }
+  &:nth-last-child(2), &:nth-last-child(2) ~.each-player-score {
+    width: 50%;
+  }
+  &:nth-last-child(3), &:nth-last-child(3) ~.each-player-score {
+    width: 33.3333%;
+  }
+  &:nth-last-child(4), &:nth-last-child(4) ~.each-player-score {
+    width: 25%;
+  }
+  &:nth-last-child(5), &:nth-last-child(5) ~.each-player-score {
+    width: 20%;
+  }
+  &:nth-last-child(6), &:nth-last-child(6) ~.each-player-score {
+    width: 16.6666%;
+  }
+  &:nth-last-child(7), &:nth-last-child(7) ~.each-player-score {
+    width: 14.2857%;
+  }
   &:nth-of-type(1) {
     .progress-bar {
       &.nonactive {
@@ -233,28 +286,44 @@ tr {
       }
     }
   }
-  .progress-bar {
-    float: none !important;
-    max-width: 100%;
-    min-width: 5%;
-    line-height: 40px !important;
+  .progress-bar-wrapper {
+    &:before {
+      display: inline-block;
+      content: "dummy";
+      font-size: 0;
+      width: 0;
+      height: 100%;
+      vertical-align: bottom;
+    }
+    height: 100%;
+    .progress-bar {
+      display: inline-block;
+      vertical-align: bottom;
+      float: none !important;
+      width: 100%;
+      max-height: 100%;
+      min-height: 10%;
+      line-height: 40px !important;
+      transition: height 0.3s ease;
+    }
   }
 }
 
 .player-name {
   position: relative;
   font-size: 14px !important;
-  margin: 10px 0;
+  margin: 10px auto;
   padding: 6px 10px !important;
-  display: inline-block !important;
+  display: table !important;
   &.current {
     background: #337ab7;
     &:before {
-      content: "⇒";
+      content: "⇑";
       display: block;
       position: absolute;
-      left: -20px;
-      top: 5px;
+      left: 0;
+      right: 0;
+      bottom: -18px;
       color: #ffffff;
     }
   }

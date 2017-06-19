@@ -24,13 +24,15 @@ class ScoreInput extends React.Component {
 
   render() {
     return (
-      <div className="form-group" style={{width: this.props.width}}>
-        <label>+</label>
-        <input
-          type="text"
-          className="form-control darts"
-          value={this.state.score}
-          onChange={this.changeScore.bind(this)} />
+      <div className="form-group">
+        <div className="input-group">
+          <div className="input-group-addon">+</div>
+          <input
+            type="text"
+            className="form-control darts"
+            value={this.state.score}
+            onChange={this.changeScore.bind(this)} />
+        </div>
       </div>
     );
   }
@@ -119,87 +121,96 @@ class ScorePage extends React.Component {
       dartsCountArray.push(i);
     }
 
+    const greetingsArray = [
+      'И это моя первая скрипка? Руку выше, движения плавнее,',
+      'Целься в единичку,',
+      'Правильно кидать - левой рукой,',
+      'Вот ты тут играешь, а там прод упал,',
+      'С утра подротил - весь день свободен,',
+      'Не забывай менять руку,',
+    ];
+
     return (
       <div className="score-page-container">
-        <table className="table">
-          <thead>
-            <tr>
-              <th>Игрок</th>
-              <th>Счёт</th>
-            </tr>
-          </thead>
-          <tbody>
-
-            {_.map(this.state.playersData.playerNames, (player, index)=>{
-              const percentage = (player.score / (self.state.playersData.maxScore / 100));
-              return (
-                <tr key={index}>
-                  <td>
-                    <span className={((percentage >= 100)
-                      ? "label label-success player-name"
-                      : "label label-default player-name") + ((player.id === self.state.currentPlayer) ? " current" : "")}>
-                      {player.name}
-                    </span>
-                    {(player.id === self.state.currentPlayer) &&
-                      <div className="current-player-controls left">
-                        <button
-                          onClick={self.addScore.bind(self, player.id)}
-                          type="button"
-                          className="btn btn-primary"
-                        >
-                          Завершить ход
-                        </button>
-                      </div>
-                    }
-                  </td>
-                  <td>
-                    <div
-                      className={(percentage >= 100)
-                        ? "progress-bar progress-bar-success progress-bar-striped active"
-                        : "progress-bar nonactive"}
-                      style={{width: percentage + "%"}}>
-                      {player.score}
+        <div className="row score-header">
+          <div className="col-sm-4">
+            Играем до {self.state.playersData.maxScore}, кидаем по {self.state.playersData.dartsCount} раз
+          </div>
+          <div className="col-sm-6">
+            {_.sample(greetingsArray) + ' ' + (_.find(self.state.playersData.playerNames, (playerObj)=>{
+              return (playerObj.id === self.state.currentPlayer);
+            })).name}
+          </div>
+        </div>
+        {_.map(self.state.playersData.playerNames, (player, index)=>{
+          const percentage = (player.score / (self.state.playersData.maxScore / 100));
+          return (
+            <div className="each-player-score" key={index}>
+              <div className="progress-bar-wrapper">
+                <div
+                  className={(percentage >= 100)
+                    ? "progress-bar progress-bar-success progress-bar-striped active"
+                    : "progress-bar nonactive"}
+                  style={{height: percentage + "%"}}>
+                  {player.score}
+                </div>
+                <span className={((percentage >= 100)
+                  ? "label label-success player-name"
+                  : "label label-default player-name") + ((player.id === self.state.currentPlayer) ? " current" : "")}>
+                  {player.name}
+                </span>
+                {self.state.currentPlayer === 100 &&
+                <div className="current-player-controls">
+                  <form className="form-inline">
+                    <div className="form-group">
+                      <button
+                        type="button"
+                        onClick={this.startNewGame.bind(this)}
+                        className="btn btn-success"
+                      >
+                        Изменить настройки
+                      </button>
+                      <button
+                        type="button"
+                        onClick={this.startSameGame.bind(this)}
+                        className="btn btn-primary"
+                      >
+                        Повторить игру
+                      </button>
                     </div>
+                  </form>
+                </div>
+                }
+                {(player.id === self.state.currentPlayer) &&
+                <div className="current-player-controls">
+                  <form className="form-inline">
+                    {_.map(dartsCountArray, (dataNum, index) => {
+                      return (
+                        <ScoreInput
+                          ref={player.id + '-' + (index + 1)}
+                          key={index}
+                          className="form-group"
+                        />
+                      );
+                    })}
                     {(player.id === self.state.currentPlayer) &&
-                    <div className="current-player-controls">
-                      <form className="form-inline">
-                        {_.map(dartsCountArray, (dataNum, index) => {
-                          return (
-                            <ScoreInput
-                              ref={player.id + '-' + (index + 1)}
-                              key={index}
-                              className="form-group"
-                              width={(100 / self.state.playersData.dartsCount) + '%'}
-                            />
-                          );
-                        })}
-                      </form>
+                    <div className="form-group">
+                      <button
+                        onClick={self.addScore.bind(self, player.id)}
+                        type="button"
+                        className="btn btn-primary"
+                      >
+                        Завершить ход
+                      </button>
                     </div>
                     }
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-        {self.state.currentPlayer === 100 &&
-          <button
-            type="button"
-            onClick={this.startNewGame.bind(this)}
-            className="btn btn-success"
-          >
-            Изменить настройки
-          </button>
-        }
-        {self.state.currentPlayer === 100 &&
-        <button
-          type="button"
-          onClick={this.startSameGame.bind(this)}
-          className="btn btn-primary"
-        >
-          Повторить игру
-        </button>
-        }
+                  </form>
+                </div>
+                }
+              </div>
+            </div>
+          );
+        })}
       </div>
 
     );
