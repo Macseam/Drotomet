@@ -71,7 +71,8 @@ class StartPage extends React.Component {
         playerNames.push({
           id: i,
           name: this.refs['inputName' + i].state.playerName || i,
-          score: 0
+          score: 0,
+          winnerStatus: 0
         });
       }
     }

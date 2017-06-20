@@ -57,6 +57,20 @@ class ScorePage extends React.Component {
     }
   }
 
+  componentDidUpdate() {
+    const self = this;
+    const currentPlayerData = _.find(this.state.playersData.playerNames, (curPlayer)=>{
+      return curPlayer.id === self.state.currentPlayer;
+    });
+    if (!_.isEmpty(currentPlayerData) && currentPlayerData.winnerStatus !== 0) {
+      this.setState({
+        currentPlayer: (this.state.currentPlayer !== this.state.playersData.playerNames.length)
+          ? this.state.currentPlayer + 1
+          : 1
+      });
+    }
+  }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.gameInfo.gameData !== this.props.gameInfo.gameData) {
       this.setState({
@@ -83,12 +97,21 @@ class ScorePage extends React.Component {
       scoreSum,
       currentState
     });
+    if (this.state.currentPlayer === this.state.playersData.playerNames.length) {
+      console.log('next round');
+      this.actions.checkForWinners({
+        currentState
+      });
+    }
     this.setState({
       currentPlayer: (this.state.currentPlayer !== this.state.playersData.playerNames.length)
         ? this.state.currentPlayer + 1
         : 1
     });
-    if (scoreSum >= this.state.playersData.maxScore) {
+    let overallWinners = _.filter(this.state.playersData.playerNames, (playerObj)=>{
+      return (playerObj.winnerStatus !== 0);
+    });
+    if (overallWinners && overallWinners.length >= 3) {
       this.setState({
         currentPlayer: 100
       });
@@ -148,6 +171,9 @@ class ScorePage extends React.Component {
           }
         </div>
         {_.map(self.state.playersData.playerNames, (player, index)=>{
+          const literal = [
+            'zero', 'first', 'second', 'third', 'fourth', 'fifth'
+          ];
           const percentage = (player.score / (self.state.playersData.maxScore / 100));
           return (
             <div className="each-player-score" key={index}>
@@ -158,6 +184,9 @@ class ScorePage extends React.Component {
                     : "progress-bar nonactive"}
                   style={{height: percentage + "%"}}>
                   {player.score}
+                  {player.winnerStatus !== 0 &&
+                    <div className={'reward' + ' ' + literal[player.winnerStatus] + '-place'}>&nbsp;</div>
+                  }
                 </div>
                 <span className={((percentage >= 100)
                   ? "label label-success player-name"

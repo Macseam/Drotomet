@@ -18,6 +18,13 @@ export function addPlayerScore (action) {
   };
 }
 
+export function checkForWinners (action) {
+  const actionName = 'CHECK_FOR_WINNERS';
+  return (dispatch) => {
+    dispatch(receiveData(actionName, action));
+  };
+}
+
 export function clearPlayersScore (action) {
   const actionName = 'CLEAR_PLAYERS_SCORE';
   return (dispatch) => {
