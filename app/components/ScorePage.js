@@ -59,14 +59,28 @@ class ScorePage extends React.Component {
 
   componentDidUpdate() {
     const self = this;
+    const overallWinners = _.filter(this.state.playersData.playerNames, (playerObj)=>{
+      return (playerObj.winnerStatus !== 0);
+    });
     const currentPlayerData = _.find(this.state.playersData.playerNames, (curPlayer)=>{
       return curPlayer.id === self.state.currentPlayer;
     });
-    if (!_.isEmpty(currentPlayerData) && currentPlayerData.winnerStatus !== 0) {
+    if (!_.isEmpty(currentPlayerData) && currentPlayerData.winnerStatus !== 0 && overallWinners.length < 3) {
       this.setState({
         currentPlayer: (this.state.currentPlayer !== this.state.playersData.playerNames.length)
           ? this.state.currentPlayer + 1
           : 1
+      });
+      if (this.state.currentPlayer === this.state.playersData.playerNames.length) {
+        console.log('next round');
+        this.actions.checkForWinners({
+          currentState: self.state.playersData
+        });
+      }
+    }
+    if (this.state.currentPlayer !== 100 && overallWinners && overallWinners.length >= 3) {
+      this.setState({
+        currentPlayer: 100
       });
     }
   }
