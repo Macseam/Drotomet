@@ -131,17 +131,21 @@ class ScorePage extends React.Component {
       'Чики-брики и в дамки,',
     ];
 
+    const currentPlayerName = _.find(self.state.playersData.playerNames, (playerObj)=>{
+      return (playerObj.id === self.state.currentPlayer);
+    });
+
     return (
       <div className="score-page-container">
         <div className="row score-header">
           <div className="col-sm-4">
             Играем до {self.state.playersData.maxScore}, кидаем по {self.state.playersData.dartsCount} раз
           </div>
-          <div className="col-sm-6">
-            {_.sample(greetingsArray) + ' ' + (_.find(self.state.playersData.playerNames, (playerObj)=>{
-              return (playerObj.id === self.state.currentPlayer);
-            })).name}
-          </div>
+          {currentPlayerName && !_.isEmpty(currentPlayerName) &&
+            <div className="col-sm-6">
+              {_.sample(greetingsArray) + ' ' + (currentPlayerName ? currentPlayerName.name : '')}
+            </div>
+          }
         </div>
         {_.map(self.state.playersData.playerNames, (player, index)=>{
           const percentage = (player.score / (self.state.playersData.maxScore / 100));
