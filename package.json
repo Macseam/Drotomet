@@ -4,7 +4,8 @@
   "description": "Simple Clean Redux Boilerplate",
   "main": "server.js",
   "scripts": {
-    "pack": "webpack"
+    "pack": "webpack",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
