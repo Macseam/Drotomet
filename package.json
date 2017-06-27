@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "pack": "webpack",
-    "start": "node server.js"
+    "start": "node server.js",
+    "postinstall": "webpack -p"
   },
   "repository": {
     "type": "git",
