@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import _ from 'lodash';
 import { Navigation } from 'react-router';
 
 import { bindActionCreators } from 'redux';
 import * as prepareActions from '../redux/actions/sampleActions';
 
-class FormGroup extends React.Component {
+class FormGroup extends Component {
 
   constructor(props) {
     super(props);
@@ -32,7 +31,7 @@ class FormGroup extends React.Component {
   }
 }
 
-class StartPage extends React.Component {
+class StartPage extends Component {
 
   constructor(props) {
     super(props);

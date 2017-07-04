@@ -12,9 +12,10 @@ const AUTH = process.env.AUTH || false;
 
 module.exports = {
 
-  entry: [
-    './app/app'
-  ],
+  entry: {
+    bundle: './app/app',
+    vendors: ["lodash"],
+  },
 
   devtool: ((NODE_ENV === 'development') ? '#inline-source-map' : false),
 
@@ -24,7 +25,8 @@ module.exports = {
 
   output: {
     path: path.resolve(__dirname, 'build'),
-    filename: 'bundle.js',
+    filename: '[name].js',
+    chunkFilename: '[id].[chunkhash].js',
     publicPath: 'build/',
   },
 
@@ -161,6 +163,7 @@ module.exports = {
 
   plugins: NODE_ENV === 'development' ? [
     extractLess,
+    new webpack.optimize.CommonsChunkPlugin({name: "vendors", filename: "vendors.bundle.js"}),
     new webpack.DefinePlugin({
       'process.env':{
         'NODE_ENV': JSON.stringify('development')
@@ -170,6 +173,7 @@ module.exports = {
     }),
   ] : [
       extractLess,
+    new webpack.optimize.CommonsChunkPlugin({name: "vendors", filename: "vendors.bundle.js"}),
       new webpack.DefinePlugin({
         'process.env':{
           'NODE_ENV': JSON.stringify('production')

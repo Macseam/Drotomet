@@ -6,7 +6,7 @@ import { Navigation } from 'react-router';
 import { bindActionCreators } from 'redux';
 import * as prepareActions from '../redux/actions/sampleActions';
 
-class ScoreInput extends React.Component {
+class ScoreInput extends Component {
 
   constructor(props) {
     super(props);
@@ -38,7 +38,7 @@ class ScoreInput extends React.Component {
   }
 }
 
-class ScorePage extends React.Component {
+class ScorePage extends Component {
 
   constructor(props) {
     super(props);
