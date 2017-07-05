@@ -13,7 +13,7 @@ const AUTH = process.env.AUTH || false;
 module.exports = {
 
   entry: {
-    bundle: './app/app',
+    app: './app/app',
     vendors: ["lodash"],
   },
 
@@ -25,7 +25,7 @@ module.exports = {
 
   output: {
     path: path.resolve(__dirname, 'build'),
-    filename: '[name].js',
+    filename: '[name].bundle.js',
     chunkFilename: '[id].[chunkhash].js',
     publicPath: 'build/',
   },
@@ -165,7 +165,6 @@ module.exports = {
     extractLess,
     new webpack.optimize.CommonsChunkPlugin({
       name: "vendors",
-      filename: "vendors.bundle.js",
       children: true,
       async: true,
     }),
@@ -180,7 +179,6 @@ module.exports = {
       extractLess,
       new webpack.optimize.CommonsChunkPlugin({
         name: "vendors",
-        filename: "vendors.bundle.js",
         children: true,
         async: true,
       }),
