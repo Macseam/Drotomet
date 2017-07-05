@@ -163,7 +163,12 @@ module.exports = {
 
   plugins: NODE_ENV === 'development' ? [
     extractLess,
-    new webpack.optimize.CommonsChunkPlugin({name: "vendors", filename: "vendors.bundle.js"}),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: "vendors",
+      filename: "vendors.bundle.js",
+      children: true,
+      async: true,
+    }),
     new webpack.DefinePlugin({
       'process.env':{
         'NODE_ENV': JSON.stringify('development')
@@ -173,7 +178,12 @@ module.exports = {
     }),
   ] : [
       extractLess,
-    new webpack.optimize.CommonsChunkPlugin({name: "vendors", filename: "vendors.bundle.js"}),
+      new webpack.optimize.CommonsChunkPlugin({
+        name: "vendors",
+        filename: "vendors.bundle.js",
+        children: true,
+        async: true,
+      }),
       new webpack.DefinePlugin({
         'process.env':{
           'NODE_ENV': JSON.stringify('production')
