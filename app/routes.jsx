@@ -7,7 +7,7 @@ import {
 
 import AppContainer from "./containers/AppContainer";
 import StartPage from "./components/StartPage";
-import ScorePage from "./components/ScorePage";
+import ScorePage from "./components/ScorePageAsync";
 import NotFound from "./components/NotFound";
 
 export default function createRoutes(store) {

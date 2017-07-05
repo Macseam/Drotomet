@@ -1,8 +1,7 @@
-import React from "react";
+import React, { Component } from 'react';
 
-// Not found page component
-export default class NotFound extends React.Component {
-  // render
+export default class NotFound extends Component {
+
   render() {
     return (
       <div className="page-not-found">
