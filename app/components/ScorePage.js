@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import _ from 'lodash';
 import { connect } from 'react-redux';
 import { Navigation } from 'react-router';
-
+import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import * as prepareActions from '../redux/actions/sampleActions';
 
@@ -38,7 +38,7 @@ class ScoreInput extends Component {
   }
 }
 
-class ScorePage extends Component {
+export class ScorePage extends Component {
 
   constructor(props) {
     super(props);
@@ -266,7 +266,7 @@ class ScorePage extends Component {
 }
 
 ScorePage.contextTypes = {
-  router: React.PropTypes.object,
+  router: PropTypes.object,
 };
 
 function mapDispatchToProps(dispatch) {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Navigation } from 'react-router';
-
+import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import * as prepareActions from '../redux/actions/sampleActions';
 
@@ -31,7 +31,7 @@ class FormGroup extends Component {
   }
 }
 
-class StartPage extends Component {
+export class StartPage extends Component {
 
   constructor(props) {
     super(props);
@@ -161,7 +161,7 @@ class StartPage extends Component {
 }
 
 StartPage.contextTypes = {
-  router: React.PropTypes.object,
+  router: PropTypes.object,
 };
 
 function mapDispatchToProps(dispatch) {
