@@ -112,7 +112,6 @@ export class ScorePage extends Component {
       currentState
     });
     if (this.state.currentPlayer === this.state.playersData.playerNames.length) {
-      console.log('next round');
       this.actions.checkForWinners({
         currentState
       });
