@@ -72,7 +72,6 @@ export class ScorePage extends Component {
           : 1
       });
       if (this.state.currentPlayer === this.state.playersData.playerNames.length) {
-        console.log('next round');
         this.actions.checkForWinners({
           currentState: self.state.playersData
         });
@@ -187,18 +186,27 @@ export class ScorePage extends Component {
           const literal = [
             'zero', 'first', 'second', 'third', 'fourth', 'fifth'
           ];
+          const literalRus = [
+            '', 'Первое место', 'Второе место', 'Третье место'
+          ];
           const percentage = (player.score / (self.state.playersData.maxScore / 100));
           return (
             <div className="each-player-score" key={index}>
               <div className="progress-bar-wrapper">
                 <div
+                  key={index}
                   className={(percentage >= 100)
                     ? "progress-bar progress-bar-success progress-bar-striped active"
                     : "progress-bar nonactive"}
                   style={{height: percentage + "%"}}>
                   {player.score}
                   {player.winnerStatus !== 0 &&
-                    <div className={'reward' + ' ' + literal[player.winnerStatus] + '-place'}>&nbsp;</div>
+                    [
+                      <div key={index+'-0'} className={'reward' + ' ' + literal[player.winnerStatus] + '-place'}>&nbsp;</div>,
+                      <div key={index+'-1'} className={'reward-text' + ' ' + literal[player.winnerStatus] + '-place'}>
+                        {literalRus[player.winnerStatus]}
+                      </div>
+                    ]
                   }
                 </div>
                 <span className={((percentage >= 100)

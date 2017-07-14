@@ -20,6 +20,7 @@ html, body {
 #app {
   width: 100%;
   height: 100%;
+  overflow: hidden;
   margin: 0 auto;
   background: transparent url('../public/images/dartboard.jpg') center center no-repeat;
   background-size: cover;
@@ -312,8 +313,7 @@ button[type=button] {
         left: 0;
         right: 0;
         margin: 0 auto;
-        top: 50%;
-        transform: translateY(-50%);
+        top: 38%;
         width: 100px;
         height: 100px;
         border-radius: 100%;
@@ -321,38 +321,74 @@ button[type=button] {
         &.first-place {
           background: transparent url('../public/images/first.jpg') center center no-repeat;
           background-size: cover;
-          &:after {
-            display: block;
-            content: "Первое место";
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-          }
+          .keyframes(first-flyin;{
+            0% {
+              transform: rotate(360deg) scale(4);
+              opacity: 0;
+            }
+            100% {
+              transform: rotate(0deg) scale(1);
+              opacity: 1;
+            }
+          });
+          .animation(first-flyin 0.5s 1 linear);
         }
         &.second-place {
           background: transparent url('../public/images/second.jpg') center center no-repeat;
           background-size: cover;
-          &:after {
-            display: block;
-            content: "Второе место";
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-          }
+          .keyframes(second-flyin;{
+            0% {
+              transform: rotate(360deg) scale(4);
+              opacity: 0;
+            }
+            50% {
+              transform: rotate(360deg) scale(4);
+              opacity: 0;
+            }
+            100% {
+              transform: rotate(0deg) scale(1);
+              opacity: 1;
+            }
+          });
+          .animation(second-flyin 1s 1 linear);
         }
         &.third-place {
           background: transparent url('../public/images/third.jpg') center center no-repeat;
           background-size: cover;
-          &:after {
-            display: block;
-            content: "Третье место";
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-          }
+          .keyframes(third-flyin;{
+            0% {
+              transform: rotate(360deg) scale(4);
+              opacity: 0;
+            }
+            75% {
+              transform: rotate(360deg) scale(4);
+              opacity: 0;
+            }
+            100% {
+              transform: rotate(0deg) scale(1);
+              opacity: 1;
+            }
+          });
+          .animation(third-flyin 1.5s 1 linear);
+        }
+      }
+      .reward-text {
+        position: absolute;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        text-align: center;
+        bottom: 25%;
+        width: 100%;
+        background: transparent;
+        &.first-place {
+
+        }
+        &.second-place {
+
+        }
+        &.third-place {
+
         }
       }
     }
