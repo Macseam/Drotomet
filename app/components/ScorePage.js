@@ -12,7 +12,7 @@ class ScoreInput extends Component {
     super(props);
 
     this.state = {
-      score: '',
+      score: ''
     };
   }
 
@@ -47,7 +47,8 @@ export class ScorePage extends Component {
 
     this.state = {
       currentPlayer: 1,
-      playersData: this.props.gameInfo.gameData
+      playersData: this.props.gameInfo.gameData,
+      randomNumber: this.props.gameInfo.randomNumber
     };
   }
 
@@ -65,7 +66,11 @@ export class ScorePage extends Component {
     const currentPlayerData = _.find(this.state.playersData.playerNames, (curPlayer)=>{
       return curPlayer.id === self.state.currentPlayer;
     });
-    if (!_.isEmpty(currentPlayerData) && currentPlayerData.winnerStatus !== 0 && overallWinners.length < 3) {
+    if (
+      !_.isEmpty(currentPlayerData)
+      && currentPlayerData.winnerStatus !== 0
+      && overallWinners.length < this.state.playersData.playerNames.length
+    ) {
       this.setState({
         currentPlayer: (this.state.currentPlayer !== this.state.playersData.playerNames.length)
           ? this.state.currentPlayer + 1
@@ -123,7 +128,7 @@ export class ScorePage extends Component {
     let overallWinners = _.filter(this.state.playersData.playerNames, (playerObj)=>{
       return (playerObj.winnerStatus !== 0);
     });
-    if (overallWinners && overallWinners.length >= 3) {
+    if (overallWinners && overallWinners.length >= this.state.playersData.playerNames.length) {
       this.setState({
         currentPlayer: 100
       });
@@ -131,11 +136,13 @@ export class ScorePage extends Component {
   }
 
   startNewGame() {
+    this.actions.changeRandomNumber();
     this.startSameGame();
     this.context.router.push('');
   }
 
   startSameGame() {
+    this.actions.changeRandomNumber();
     this.actions.clearPlayersScore({currentState: this.props.gameInfo.gameData});
     this.setState({
       currentPlayer: 1
@@ -157,7 +164,7 @@ export class ScorePage extends Component {
     }
 
     const greetingsArray = [
-      'И это моя первая скрипка? Руку выше, движения плавнее,',
+      'Руку выше, движения плавнее,',
       'Целься в единичку,',
       'Правильно кидать - левой рукой,',
       'Вот ты тут играешь, а там прод упал,',
@@ -202,8 +209,20 @@ export class ScorePage extends Component {
                   {player.score}
                   {player.winnerStatus !== 0 &&
                     [
-                      <div key={index+'-0'} className={'reward' + ' ' + literal[player.winnerStatus] + '-place'}>&nbsp;</div>,
-                      <div key={index+'-1'} className={'reward-text' + ' ' + literal[player.winnerStatus] + '-place'}>
+                      <div
+                        key={index+'-0'}
+                        className={
+                          'reward'
+                          + ' ' + literal[player.winnerStatus] + '-place'
+                          + ' seed' + this.props.gameInfo.randomNumber
+                        }
+                      >
+                        &nbsp;
+                      </div>,
+                      <div
+                        key={index+'-1'}
+                        className={'reward-text' + ' ' + literal[player.winnerStatus] + '-place'}
+                      >
                         {literalRus[player.winnerStatus]}
                       </div>
                     ]

@@ -3,6 +3,7 @@
 import _ from 'lodash';
 
 const initialState = {
+  randomNumber: Math.round(0.5 + Math.random() * (5 - 0.5 + 1)),
   chaptersList: null,
   chapterItemsList: null,
   gameData: null
@@ -13,6 +14,9 @@ export default function gameInfo(state = initialState, action) {
 
     case 'INITIALIZE_GAME_DATA_SUCCESS':
       return { ...state, gameData: action.data };
+
+    case 'CHANGE_RANDOM_NUMBER_SUCCESS':
+      return { ...state, randomNumber: Math.round(0.5 + Math.random() * (5 - 0.5 + 1)) };
 
     case 'ADD_PLAYER_SCORE_SUCCESS':
       let editedPlayers = [];

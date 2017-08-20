@@ -11,6 +11,13 @@ export function initializeGameData (action) {
   };
 }
 
+export function changeRandomNumber (action) {
+  const actionName = 'CHANGE_RANDOM_NUMBER';
+  return (dispatch) => {
+    dispatch(receiveData(actionName, action));
+  };
+}
+
 export function addPlayerScore (action) {
   const actionName = 'ADD_PLAYER_SCORE';
   return (dispatch) => {
