@@ -1,7 +1,7 @@
 {
-  "name": "simple-clean-redux-boilerplate",
+  "name": "drotomet",
   "version": "1.0.0",
-  "description": "Simple Clean Redux Boilerplate",
+  "description": "Drotomet",
   "main": "server.js",
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack",
@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Macseam/Simple-Clean-Redux-Boilerplate.git"
+    "url": "git+https://github.com/Macseam/Drotomet.git"
   },
   "author": "Max Shvetsov",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Macseam/Simple-Clean-Redux-Boilerplate/issues"
+    "url": "https://github.com/Macseam/Drotomet/issues"
   },
-  "homepage": "https://github.com/Macseam/Simple-Clean-Redux-Boilerplate#readme",
+  "homepage": "https://github.com/Macseam/Drotomet#readme",
   "devDependencies": {
     "babel-cli": "^6.23.0",
     "babel-core": "^6.24.0",

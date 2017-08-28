@@ -7,8 +7,6 @@ import { createLogger } from 'redux-logger';
 import thunk from 'redux-thunk';
 import rootReducer from '../redux/reducers';
 
-const NODE_ENV = process.env.NODE_ENV || 'production';
-
 const logger = createLogger({
   diff: true,
   level: {
